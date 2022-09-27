@@ -1,5 +1,3 @@
-import cvxpy
-
 from lpv_opt.posterior_probs_gmm import posterior_probs_gmm
 import numpy as np
 import cvxpy as cp

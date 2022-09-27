@@ -16,7 +16,7 @@ from utils.plotting.plot_ellopsoid import plot_result_3D
 
 pkg_dir = 'E:\ds-opt-python\ds-opt-python'
 chosen_dataset = 6 #6 # 4 (when conducting 2D test)
-sub_sample = 1  # '>2' for real 3D Datasets, '1' for 2D toy datasets
+sub_sample = 2  # '>2' for real 3D Datasets, '1' for 2D toy datasets
 nb_trajectories = 4  # Only for real 3D data
 Data, Data_sh, att, x0_all, data, dt = load_dataset_DS(pkg_dir, chosen_dataset, sub_sample, nb_trajectories)
 vel_samples = 10
@@ -103,11 +103,13 @@ if adjusts_C == 1:
         rel_dilation_fact = 0.75
     Sigma_ = adjust_Covariances(ds_gmm.Priors, ds_gmm.Sigma, tot_dilation_factor, rel_dilation_fact)
     ds_gmm.Sigma = Sigma_
-if M == 3:
-    plot_result_3D(ds_gmm.Mu, ds_gmm.Sigma, Xi_ref)
-elif M == 2:
-    gmm = GMM(len(ds_gmm.Priors), ds_gmm.Priors, ds_gmm.Mu.T, ds_gmm.Sigma)
-    plot_result(Xi_ref, gmm, len(ds_gmm.Mu), ds_gmm.Mu, 2)
+
+# just check the result of adjust Covariances
+# if M == 3:
+#     plot_result_3D(ds_gmm.Mu, ds_gmm.Sigma, Xi_ref)
+# elif M == 2:
+#     gmm = GMM(len(ds_gmm.Priors), ds_gmm.Priors, ds_gmm.Mu.T, ds_gmm.Sigma)
+#     plot_result(Xi_ref, gmm, len(ds_gmm.Mu), ds_gmm.Mu, 2)
 
 ds_gmm.Mu, ds_gmm.Priors, ds_gmm.Sigma, P_opt = load_learned_data_from_ML()
 
