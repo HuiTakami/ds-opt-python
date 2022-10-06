@@ -13,6 +13,7 @@ from test_data_from_ml.load_learned_data_from_ML import load_learned_data_from_M
 from test_data_from_ml.port_data_to_yaml import port_data_to_yaml
 import scipy as sci
 from utils.plotting.plot_ellopsoid import plot_result_3D
+from lpv_opt.my_learn_function_2 import my_learn_function
 
 pkg_dir = 'E:\ds-opt-python\ds-opt-python'
 chosen_dataset = 6 #6 # 4 (when conducting 2D test)
@@ -21,7 +22,10 @@ nb_trajectories = 4  # Only for real 3D data
 Data, Data_sh, att, x0_all, data, dt = load_dataset_DS(pkg_dir, chosen_dataset, sub_sample, nb_trajectories)
 vel_samples = 10
 vel_size = 20
-plot_reference_trajectories_DS(Data, att, vel_samples, vel_size)
+# plot_reference_trajectories_DS(Data, att, vel_samples, vel_size)
+
+# S.P.E.C.I.A.L.
+# P_test = my_learn_function(Data_sh)
 
 M = int(len(Data) / 2)
 Xi_ref = Data[0:M, :]
@@ -111,7 +115,7 @@ if adjusts_C == 1:
 #     gmm = GMM(len(ds_gmm.Priors), ds_gmm.Priors, ds_gmm.Mu.T, ds_gmm.Sigma)
 #     plot_result(Xi_ref, gmm, len(ds_gmm.Mu), ds_gmm.Mu, 2)
 
-ds_gmm.Mu, ds_gmm.Priors, ds_gmm.Sigma, P_opt = load_learned_data_from_ML()
+# ds_gmm.Mu, ds_gmm.Priors, ds_gmm.Sigma, P_opt = load_learned_data_from_ML()
 
 #############################################################
 # Step 3 (DS ESTIMATION): ESTIMATE SYSTEM DYNAMICS MATRICES #
@@ -126,7 +130,8 @@ symm_constr = 0
 if lyap_constr == 0 or lyap_constr == 1:
     P_opt = np.eye(M)
 else:
-    P_opt = P_opt
+    # P_opt = P_opt
+    P_opt = my_learn_function(Data_sh)
 
 if lyap_constr == 1:
     A_k, b_k, _ = optimize_lpv_ds_from_data(Data_sh, np.eye(M), lyap_constr, ds_gmm, P_opt, init_cvx, symm_constr)

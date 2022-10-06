@@ -3,6 +3,7 @@ import numpy as np
 from Structs_DS import Vxf_struct
 from computeEnergy import compute_Energy
 
+
 def learn_energy(Vxf0, Data, options):
     ### initializing ###
     # parsing options
