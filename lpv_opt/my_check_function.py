@@ -5,13 +5,13 @@ def my_check_function(Data, P):
     d = int(len(Data) / 2)
     x = Data[:d, :]
     xd = Data[d:, :]
-    print("the calculated obj function (validation) is {}".format(object_function(P, x, xd, 0.0001)))
+    return object_function(P, x, xd, 0.0001)
 
 
 
 def object_function(P, x, xd, w):
     J_total = 0
-    for i in np.arange(len(x)):
+    for i in np.arange(len(x[0])):
         dlyap_dx, dlyap_dt = compute_Energy_Single(x[:, i], xd[:, i], P)
         norm_vx = np.linalg.norm(dlyap_dx, 2)
         norm_xd = np.linalg.norm(xd[:, i], 2)

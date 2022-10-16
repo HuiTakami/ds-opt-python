@@ -50,6 +50,7 @@ def load_dataset_DS(pkg_dir, dataset, sub_sample, nb_trajectories):
         data_ = np.array(data_["data"])
         N = len(data_)
         traj = np.random.choice(np.arange(N), nb_trajectories, replace=False)
+        traj = np.array([7, 4, 0, 3])
         data = data_[traj]
         for l in np.arange(nb_trajectories):
             # Gather Data

@@ -13,10 +13,10 @@ from test_data_from_ml.load_learned_data_from_ML import load_learned_data_from_M
 from test_data_from_ml.port_data_to_yaml import port_data_to_yaml
 import scipy as sci
 from utils.plotting.plot_ellopsoid import plot_result_3D
-from lpv_opt.my_learn_function_2 import my_learn_function
+from lpv_opt.my_learn_function_3 import my_learn_function
 
 pkg_dir = 'E:\ds-opt-python\ds-opt-python'
-chosen_dataset = 6 #6 # 4 (when conducting 2D test)
+chosen_dataset = 7 #6 # 4 (when conducting 2D test)
 sub_sample = 2  # '>2' for real 3D Datasets, '1' for 2D toy datasets
 nb_trajectories = 4  # Only for real 3D data
 Data, Data_sh, att, x0_all, data, dt = load_dataset_DS(pkg_dir, chosen_dataset, sub_sample, nb_trajectories)
@@ -25,7 +25,7 @@ vel_size = 20
 # plot_reference_trajectories_DS(Data, att, vel_samples, vel_size)
 
 # S.P.E.C.I.A.L.
-# P_test = my_learn_function(Data_sh)
+P_test = my_learn_function(Data_sh)
 
 M = int(len(Data) / 2)
 Xi_ref = Data[0:M, :]
